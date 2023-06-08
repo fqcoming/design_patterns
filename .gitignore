@@ -2,5 +2,6 @@ observer/observer.exe
 observer/observer
 proxy/proxy.exe
 adapter/adapter.exe
+adapter/adapter
 decorator/decorator.exe
 .vscode/

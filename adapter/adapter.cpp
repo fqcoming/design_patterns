@@ -21,7 +21,7 @@ public:
 // 仅支持VGA接口的投影仪的电脑类
 class Computer {
 public:
-    void playVideo(unique_ptr<VGA> &pVGA) {
+    void playVideo(VGA* pVGA) {
         pVGA->play();
     }
 };
@@ -53,21 +53,26 @@ public:
     }
 
 private:
-    shared_ptr<HDMI> pHdmi;
+    HDMI* pHdmi;
 };
 
-
-
+// g++ -o adapter adapter.cpp -g
+// valgrind --tool=memcheck --leak-check=full ./adapter
 
 int main() {
 
     Computer computer;
 
-    unique_ptr<VGA> tv01(new TV01);
+    VGA* tv01 = new TV01();
     computer.playVideo(tv01);
 
-    unique_ptr<VGA> tv02(new VGAAdapter(new TV02()));
-    computer.playVideo(tv02);
+    HDMI* tv02 = new TV02();
+    VGA*  tv03 = new VGAAdapter(tv02);
+    computer.playVideo(tv03);
+
+    delete tv01;
+    delete tv02;
+    delete tv03;
 
     return 0;
 }
