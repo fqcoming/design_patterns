@@ -1,4 +1,5 @@
 observer/observer.exe
+observer/observer
 proxy/proxy.exe
 adapter/adapter.exe
 decorator/decorator.exe
